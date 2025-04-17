@@ -23,18 +23,16 @@ type WebhookRequest struct {
 	Url     string            `envconfig:"URL"`
 }
 
-const webhookEnvPrefix = "SYNC_WEBHOOK_"
-
 func (c *Config) loadWebhookSettings() error {
 	webhookSettings := WebhookSettings{}
 
-	if err := envconfig.Process(webhookEnvPrefix+"FAILURE", &webhookSettings.Failure); err != nil {
+	if err := envconfig.Process("WEBHOOK_SYNC_FAILURE", &webhookSettings.Failure); err != nil {
 		return fmt.Errorf("process webhook env vars for failure: %w", err)
 	}
-	if err := envconfig.Process(webhookEnvPrefix+"SUCCESS", &webhookSettings.Success); err != nil {
+	if err := envconfig.Process("WEBHOOK_SYNC_SUCCESS", &webhookSettings.Success); err != nil {
 		return fmt.Errorf("process webhook env vars for success: %w", err)
 	}
-	if err := envconfig.Process(webhookEnvPrefix+"CLIENT", &webhookSettings.Client); err != nil {
+	if err := envconfig.Process("WEBHOOK_CLIENT", &webhookSettings.Client); err != nil {
 		return fmt.Errorf("process webhook env vars for client: %w", err)
 	}
 

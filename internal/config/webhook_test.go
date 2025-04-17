@@ -8,10 +8,10 @@ import (
 )
 
 func TestWebhookSettings_Load_Success(t *testing.T) {
-	t.Setenv("SYNC_WEBHOOK_SUCCESS_URL", "http://success.example.com")
-	t.Setenv("SYNC_WEBHOOK_SUCCESS_METHOD", "POST")
-	t.Setenv("SYNC_WEBHOOK_SUCCESS_BODY", "{\"status\":\"ok\"}")
-	t.Setenv("SYNC_WEBHOOK_SUCCESS_HEADERS", "Content-Type:application/json,Authorization:Bearer token,X-Custom-Header: CustomValue")
+	t.Setenv("WEBHOOK_SYNC_SUCCESS_URL", "http://success.example.com")
+	t.Setenv("WEBHOOK_SYNC_SUCCESS_METHOD", "POST")
+	t.Setenv("WEBHOOK_SYNC_SUCCESS_BODY", "{\"status\":\"ok\"}")
+	t.Setenv("WEBHOOK_SYNC_SUCCESS_HEADERS", "Content-Type:application/json,Authorization:Bearer token,X-Custom-Header: CustomValue")
 
 	conf := Config{
 		Sync: &Sync{},
@@ -31,10 +31,10 @@ func TestWebhookSettings_Load_Success(t *testing.T) {
 }
 
 func TestWebhookSettings_Load_Failure(t *testing.T) {
-	t.Setenv("SYNC_WEBHOOK_FAILURE_URL", "http://failure.example.com")
-	t.Setenv("SYNC_WEBHOOK_FAILURE_METHOD", "PUT")
-	t.Setenv("SYNC_WEBHOOK_FAILURE_BODY", "{\"status\":\"error\"}")
-	t.Setenv("SYNC_WEBHOOK_FAILURE_HEADERS", "Content-Type:application/json")
+	t.Setenv("WEBHOOK_SYNC_FAILURE_URL", "http://failure.example.com")
+	t.Setenv("WEBHOOK_SYNC_FAILURE_METHOD", "PUT")
+	t.Setenv("WEBHOOK_SYNC_FAILURE_BODY", "{\"status\":\"error\"}")
+	t.Setenv("WEBHOOK_SYNC_FAILURE_HEADERS", "Content-Type:application/json")
 
 	conf := Config{
 		Sync: &Sync{},
@@ -52,8 +52,8 @@ func TestWebhookSettings_Load_Failure(t *testing.T) {
 }
 
 func TestWebhookSettings_DefaultValues(t *testing.T) {
-	t.Setenv("SYNC_WEBHOOK_SUCCESS_URL", "http://success.example.com")
-	t.Setenv("SYNC_WEBHOOK_FAILURE_URL", "http://failure.example.com")
+	t.Setenv("WEBHOOK_SYNC_SUCCESS_URL", "http://success.example.com")
+	t.Setenv("WEBHOOK_SYNC_FAILURE_URL", "http://failure.example.com")
 
 	conf := Config{
 		Sync: &Sync{},
@@ -71,8 +71,8 @@ func TestWebhookSettings_DefaultValues(t *testing.T) {
 }
 
 func TestWebhookSettings_InvalidHeaders(t *testing.T) {
-	t.Setenv("SYNC_WEBHOOK_SUCCESS_URL", "http://success.example.com")
-	t.Setenv("SYNC_WEBHOOK_SUCCESS_HEADERS", "InvalidHeader")
+	t.Setenv("WEBHOOK_SYNC_SUCCESS_URL", "http://success.example.com")
+	t.Setenv("WEBHOOK_SYNC_SUCCESS_HEADERS", "InvalidHeader")
 
 	conf := Config{
 		Sync: &Sync{},
@@ -94,8 +94,8 @@ func TestWebhookSettings_EmptyURLs(t *testing.T) {
 }
 
 func TestWebhookSettings_ClientConfiguration(t *testing.T) {
-	t.Setenv("SYNC_WEBHOOK_SUCCESS_URL", "http://success.example.com")
-	t.Setenv("SYNC_WEBHOOK_CLIENT_SKIP_TLS_VERIFICATION", "true")
+	t.Setenv("WEBHOOK_SYNC_SUCCESS_URL", "http://success.example.com")
+	t.Setenv("WEBHOOK_CLIENT_SKIP_TLS_VERIFICATION", "true")
 
 	conf := Config{
 		Sync: &Sync{},

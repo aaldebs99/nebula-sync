@@ -135,43 +135,45 @@ Config keys are relative to the section and are **case sensitive**. For example,
 
 ### Webhooks
 
-Nebula Sync can invoke webhooks depeneding if a sync succeeded or failed. URL is required for the webhook to trigger. Both success and failure webhooks use the same enviroment variable pattern. Webhooks have a timeout of 10 seconds.
+Nebula Sync can invoke webhooks depending if a sync succeeded or failed. URL is required for the webhook to trigger. Both success and failure webhooks use the same enviroment variable pattern. Webhooks have a timeout of 10 seconds.
 
-| Name                                    | Default | Example                           | Description                                        |
-|-----------------------------------------|---------|-----------------------------------|----------------------------------------------------|
-| `SYNC_WEBHOOK_(SUCCESS\|FAILURE)_URL`    | n/a     | `https://www.example.com/webhook` | URL to invoke for the webhook    |
-| `SYNC_WEBHOOK_(SUCCESS\|FAILURE)_METHOD` | `POST`  | `GET`                             | The HTTP method for the webhook     |
-| `SYNC_WEBHOOK_(SUCCESS\|FAILURE)_BODY`   | n/a     | `this is my webhook body`         | The body of the webhook request |
-| `SYNC_WEBHOOK_(SUCCESS\|FAILURE)_HEADERS` | n/a    | `header1:foo,header2:bar`         | HTTP headers to set for the webhook request in the format `key:value` separated by comma. Any whitespace will be used verbatim, no string trimming. |
+> **Note:** Replace `<OUTCOME>` with either `SUCCESS` or `FAILURE`.
+
+| Name                                 | Default | Example                            | Description |
+|--------------------------------------|---------|------------------------------------|-------------|
+| `WEBHOOK_SYNC_<OUTCOME>_URL`            | n/a     | `https://www.example.com/webhook`  | URL to invoke for the webhook |
+| `WEBHOOK_SYNC_<OUTCOME>_METHOD`         | `POST`  | `GET`                              | The HTTP method for the webhook |
+| `WEBHOOK_SYNC_<OUTCOME>_BODY`           | n/a     | `this is my webhook body`          | The body of the webhook request |
+| `WEBHOOK_SYNC_<OUTCOME>_HEADERS`        | n/a     | `header1:foo,header2:bar`          | HTTP headers to set for the webhook request in the format `key:value` separated by comma. Any whitespace will be used verbatim, no string trimming. |
 
 Additionally, you can skip TLS verification for all webhooks if necessary:
 
 | Name                                            | Default | Example         | Description                                        |
 |-------------------------------------------------|---------|-----------------|----------------------------------------------------|
-| `SYNC_WEBHOOK_CLIENT_SKIP_TLS_VERIFICATION`     | false   | true            | Skips TLS certificate verification                 |
+| `WEBHOOK_CLIENT_SKIP_TLS_VERIFICATION`     | false   | true            | Skips TLS certificate verification                 |
 
 #### Integration examples:
 
 ##### healthcheck.io:
 
 ```
-SYNC_WEBHOOK_SUCCESS_URL=https://hc-ping.com/{your-slug-or-guid-here}
-SYNC_WEBHOOK_FAILURE_URL=https://hc-ping.com/{your-slug-or-guid-here}/fail
+WEBHOOK_SYNC_SUCCESS_URL=https://hc-ping.com/{your-slug-or-guid-here}
+WEBHOOK_SYNC_FAILURE_URL=https://hc-ping.com/{your-slug-or-guid-here}/fail
 ```
 
 ##### Apprise:
 
 ```
-SYNC_WEBHOOK_FAILURE_URL=http://localhost:8080/notify
-SYNC_WEBHOOK_FAILURE_BODY=urls=mailto://user:pass@gmail.com&body=test message
+WEBHOOK_SYNC_FAILURE_URL=http://localhost:8080/notify
+WEBHOOK_SYNC_FAILURE_BODY=urls=mailto://user:pass@gmail.com&body=test message
 ```
 
 ##### A service that needs JSON:
 
 ```
-SYNC_WEBHOOK_FAILURE_URL=https://www.example.com/notify.json
-SYNC_WEBHOOK_FAILURE_BODY={"hello":"world"}
-SYNC_WEBHOOK_FAILURE_HEADERS=Content-Type:application/json
+WEBHOOK_SYNC_FAILURE_URL=https://www.example.com/notify.json
+WEBHOOK_SYNC_FAILURE_BODY={"hello":"world"}
+WEBHOOK_SYNC_FAILURE_HEADERS=Content-Type:application/json
 ```
 
 ## Notes / Known issues
