@@ -1,7 +1,7 @@
 # nebula-sync
 
 [![Release version](https://img.shields.io/github/v/release/lovelaze/nebula-sync)](https://github.com/lovelaze/nebula-sync/releases/latest)
-[![Tests](https://img.shields.io/github/actions/workflow/status/lovelaze/nebula-sync/test.yml?branch=main&label=tests)](https://github.com/lovelaze/nebula-sync/actions/workflows/test.yml?query=branch%3Amain)
+[![Tests](https://img.shields.io/github/actions/workflow/status/lovelaze/nebula-sync/go.yml?branch=main&label=tests)](https://github.com/lovelaze/nebula-sync/actions/workflows/go.yml?query=branch%3Amain)
 ![Go version](https://img.shields.io/github/go-mod/go-version/lovelaze/nebula-sync)
 [![Docker image size](https://img.shields.io/docker/image-size/lovelaze/nebula-sync/latest)](https://hub.docker.com/r/lovelaze/nebula-sync)
 
